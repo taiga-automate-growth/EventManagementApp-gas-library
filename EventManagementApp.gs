@@ -17,7 +17,7 @@ class EventManagementApp_{
   /**
    * 申し込みを受け付ける
    * 
-   * @param {EventObject} e フォームの回答送信イベントオブジェクト
+   * @param {EventObject} formSubmitEvent フォームの回答送信イベントオブジェクト
    * @param {String} nameQuestionTitle Googleフォームの名前を求める質問文
    * @param {String} emailQuestionTitle Googleフォームのメールアドレスを求める質問文
    * @param {String} selectParticipantDateQuestionTitle Googleフォームのイベント参加日時選択を求める質問文
@@ -81,7 +81,7 @@ class EventManagementApp_{
   /**
    * 出席情報を管理する
    * 
-   * @param {EventObject} e スプレッドシート編集イベントオブジェクト
+   * @param {EventObject} sheetChangeEvent スプレッドシート変更イベントオブジェクト
    * @param {String} attendanceSheetName 
    */
   managedAttendance(e, attendanceSheetName){
@@ -140,7 +140,7 @@ function build(ssId, eventSheetName){
 /**
  * 申し込みを受け付ける
  * 
- * @param {EventObject} e フォームの回答送信イベントオブジェクト
+ * @param {EventObject} formSubmitEvent フォームの回答送信イベントオブジェクト
  * @param {String} nameQuestionTitle Googleフォームの名前を求める質問文
  * @param {String} emailQuestionTitle Googleフォームのメールアドレスを求める質問文
  * @param {String} selectParticipantDateQuestionTitle Googleフォームのイベント参加日時選択を求める質問文
@@ -162,7 +162,7 @@ function acceptApplication(e, nameQuestionTitle, emailQuestionTitle, selectParti
 /**
  * 出席情報を管理する
  * 
- * @param {EventObject} e スプレッドシート編集イベントオブジェクト
+ * @param {EventObject} sheetChangeEvent スプレッドシート変更イベントオブジェクト
  * @param {String} attendanceSheetName 
  */
 function managedAttendance(e, attendanceSheetName){
