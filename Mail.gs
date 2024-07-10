@@ -39,13 +39,12 @@ class Mail_{
   /**
    * 件名と本文の質問を回答に置換
    * 
-   * @param {Answer_} answer 回答オブジェクト
+   * @param {Object} questionsWithAnswer 質問とそれに対する回答のオブジェクト
    */
-  replaceSubjectAndBody(answer){
-    const answers = answer.getAllQuestionWithAnswer();
-    Object.keys(answers).forEach(question => {
-      this.subject = this.subject.split(`{{${question}}}`).join(answers[question]);
-      this.body = this.body.split(`{{${question}}}`).join(answers[question]);
+  replaceSubjectAndBody(questionsWithAnswer){
+    Object.keys(questionsWithAnswer).forEach(question => {
+      this.subject = this.subject.split(`{{${question}}}`).join(questionsWithAnswer[question]);
+      this.body = this.body.split(`{{${question}}}`).join(questionsWithAnswer[question]);
     });
   }
 

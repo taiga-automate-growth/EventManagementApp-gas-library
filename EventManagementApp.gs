@@ -72,7 +72,8 @@ class EventManagementApp_{
       body += applicant.getRequestResult();
       const mail = new Mail_(applicant.email, subject, body, fromAddress, fromName, cc, bcc, applicant.qrcodes);
       mail.attachmentToZip(`${applicant.name} 様 QRコード`);
-      organizer.reply(mail, answer);
+      const questionsWithAnswer = answer.getAllQuestionWithAnswer();
+      organizer.reply(mail, questionsWithAnswer);
     }
   }
 

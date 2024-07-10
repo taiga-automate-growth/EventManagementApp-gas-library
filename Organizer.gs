@@ -80,10 +80,10 @@ class Organizer_{
    * 返信する
    * 
    * @param {Mail_} mail メールオブジェクト
-   * @param {Answer_} answer 回答オブジェクト
+   * @param {Object} questionsWithAnswer 質問とそれに対する回答のオブジェクト
    */
-  reply(mail, answer){
-    mail.replaceSubjectAndBody(answer);
+  reply(mail, questionsWithAnswer){
+    mail.replaceSubjectAndBody(questionsWithAnswer);
     mail.sent();
   }
 

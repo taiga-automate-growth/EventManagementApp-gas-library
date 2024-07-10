@@ -11,7 +11,7 @@ class Applicant_{
    * 
    */
   constructor(name, email, participantDates = []){
-    this.name = name;
+    this.name = name.replace(/\s+/g, '');
     this.email = email;
     this.participantDates = participantDates;
     this.qrcodes = [];
