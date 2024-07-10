@@ -20,7 +20,7 @@ class Organizer_{
   receiveApplication(applicant){
 
     // 参加者の申し込み参加日時をループ
-    const participantDates = applicant.participantDateCollection.getAllParticipantDates();
+    const participantDates = applicant.participantDates;
 
     for(const participantDate of participantDates){
 
@@ -52,7 +52,7 @@ class Organizer_{
    * @param {String} folderId QRを保存するフォルダーのID
    */
   createQR(applicant, folderId){
-    const participantDates = applicant.participantDateCollection.getAllParticipantDates();
+    const participantDates = applicant.participantDates;
     console.log(participantDates);
     for (const participantDate of participantDates){
       console.log(participantDate);

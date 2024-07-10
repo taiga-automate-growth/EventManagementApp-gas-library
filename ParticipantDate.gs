@@ -1,3 +1,6 @@
+/**
+ * 希望参加日時を表すクラス
+ */
 class ParticipantDate_{
   /**
    * 初期化

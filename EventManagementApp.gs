@@ -48,8 +48,7 @@ class EventManagementApp_{
       participantDates = participantDates.map(participantDate => {
         return new ParticipantDate_(participantDate);
       });
-      const participantDateCollection = new ParticipantDateCollection_(participantDates);
-      const applicant = new Applicant_(name, email, participantDateCollection);
+      const applicant = new Applicant_(name, email, participantDates);
 
       // 主催者をインスタンス化
       const eventRepository = new EventRepository_(this.ssId,this.eventSheetName);
