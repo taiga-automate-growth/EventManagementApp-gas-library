@@ -38,13 +38,12 @@ class EventRepository_{
   /**
    * イベントを一括で保存する
    * 
-   * @param {EventCollection_} eventCollection イベントコレクションオブジェクト
+   * @param {Array<Event_>} events イベントの配列
    */
-  saveAll(eventCollection){
+  saveAll(events){
     const rows = this.sh.getLastRow() - 1;
     const cols = this.sh.getLastColumn();
     this.sh.getRange(2, 1, rows, cols).clearContent();
-    const events = eventCollection.getAsArray();
     this.sh.getRange(2, 1, events.length, events[0].length).setValues(events);
   }
 

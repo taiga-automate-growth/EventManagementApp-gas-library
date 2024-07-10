@@ -54,14 +54,13 @@ class EventManagementApp_{
       // 主催者をインスタンス化
       const eventRepository = new EventRepository_(this.ssId,this.eventSheetName);
       const events = eventRepository.selectAll();
-      const eventCollection = new EventCollection_(events);
-      const organizer = new Organizer_(eventCollection);
+      const organizer = new Organizer_(events);
       
       // 主催者が申し込みを受け付ける
       organizer.receiveApplication(applicant);
 
       // イベントリポジトリが更新されたイベント情報をテーブルに保存
-      eventRepository.saveAll(eventCollection);
+      eventRepository.saveAll(organizer.getEventAsArray());
 
       // 主催者がフォームの選択肢を更新
       const participantQuestion = new ParticipantDateQuestion_(formId, participantDateQuestionTitle, choicesType);
@@ -98,7 +97,7 @@ class EventManagementApp_{
     const eventRepository = new EventRepository_(this.ssId,this.eventSheetName);
     const event = eventRepository.findByDateAndTime(participant.getDate());
     console.log(event);
-    const organizer = new Organizer_(new EventCollection_());
+    const organizer = new Organizer_();
     organizer.receiveAttendance(event);
     eventRepository.save(event);
   }
@@ -116,8 +115,7 @@ class EventManagementApp_{
     // 主催者をインスタンス化
     const eventRepository = new EventRepository_(this.ssId,this.eventSheetName);
     const events = eventRepository.selectAll();
-    const eventCollection = new EventCollection_(events);
-    const organizer = new Organizer_(eventCollection);
+    const organizer = new Organizer_(events);
 
     // 主催者がフォームの参加日時選択肢を更新
     const participantQuestion = new ParticipantDateQuestion_(formId, participantDateQuestionTitle, choicesType);
