@@ -1,4 +1,4 @@
-const eventRepository = new EventRepository_(ssId, eventSheetName);
+// const eventRepository = new EventRepository_(ssId, eventSheetName);
 
 function testSelectAll_(){
   const allData = eventRepository.selectAll();

@@ -1,4 +1,4 @@
-const organizer = new Organizer_(new EventCollection_(new EventRepository_(ssId, eventSheetName).selectAll()));
+// const organizer = new Organizer_(new EventCollection_(new EventRepository_(ssId, eventSheetName).selectAll()));
 
 
 function testReceriveApplication_(){

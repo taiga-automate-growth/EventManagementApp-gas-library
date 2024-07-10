@@ -12,6 +12,7 @@ class EventRepository_{
   constructor(ssId, eventSheetName){
     this.ssId = ssId;
     this.eventSheetName = eventSheetName;
+    console.log(this.ssId);
     this.ss = SpreadsheetApp.openById(this.ssId);
     this.sh = this.ss.getSheetByName(this.eventSheetName);
   }

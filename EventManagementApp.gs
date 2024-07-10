@@ -81,17 +81,17 @@ class EventManagementApp_{
   /**
    * 出席情報を管理する
    * 
-   * @param {EventObject} sheetChangeEvent スプレッドシート変更イベントオブジェクト
+   * @param {EventObject} sheetChangeEventObject スプレッドシート変更イベントオブジェクト
    * @param {String} attendanceSheetName 
    */
-  managedAttendance(e, attendanceSheetName){
+  managedAttendance(sheetChangeEventObject, attendanceSheetName){
 
     // シート編集イベントをインスタンス化
-    const changeSheetEvent = new ChangeSheetEvent_(e);
-    if(!changeSheetEvent.isBelongToTargetSheet(attendanceSheetName) || !changeSheetEvent.isValueExsist()) return false;
+    const sheetChangeEvent = new SheetChangeEvent_(sheetChangeEventObject);
+    if(!sheetChangeEvent.isBelongToTargetSheet(attendanceSheetName) || !sheetChangeEvent.isValueExsist()) return false;
 
     // 参加者をインスタンス化
-    const participantDatas = changeSheetEvent.getScanData();
+    const participantDatas = sheetChangeEvent.getScanData();
     const participant = new Participant_(participantDatas);
 
     // 主催者は出席を受け付ける

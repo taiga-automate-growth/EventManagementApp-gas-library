@@ -1,15 +1,15 @@
 /**
  * シート変更イベント
  */
-class ChangeSheetEvent_{
+class SheetChangeEvent_{
   /**
    * 初期化
    * 
-   * @param {EventObject} e スプレッドシート変更イベントオブジェクト
+   * @param {EventObject} sheetChangeEventObject スプレッドシート変更イベントオブジェクト
    */
-  constructor(e){
-    this.activeCell = e.source.getActiveCell();
-    this.type = e.changeType;
+  constructor(sheetChangeEventObject){
+    this.activeCell = sheetChangeEventObject.source.getActiveCell();
+    this.type = sheetChangeEventObject.changeType;
   }
 
   /**
