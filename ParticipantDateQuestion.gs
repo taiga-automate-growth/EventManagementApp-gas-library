@@ -1,7 +1,7 @@
 /**
  * イベント参加日時選択の質問を表すクラス
  */
-class SelectParticipantDateQuestion_{
+class ParticipantDateQuestion_{
   /**
    * 初期化
    * 

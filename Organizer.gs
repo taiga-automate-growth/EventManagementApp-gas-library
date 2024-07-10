@@ -34,7 +34,7 @@ class Organizer_{
   /**
    * 選択肢を更新する
    * 
-   * @params {SelectParticipantDateQuestion_} question 選択肢を更新する対象になるフォームの質問
+   * @params {ParticipantDateQuestion_} question 選択肢を更新する対象になるフォームの質問
    */
   refreshChoices(question){
     const events = this.eventCollection.getAllEvents();

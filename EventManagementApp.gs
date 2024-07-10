@@ -20,7 +20,7 @@ class EventManagementApp_{
    * @param {EventObject} formSubmitEvent フォームの回答送信イベントオブジェクト
    * @param {String} nameQuestionTitle Googleフォームの名前を求める質問文
    * @param {String} emailQuestionTitle Googleフォームのメールアドレスを求める質問文
-   * @param {String} selectParticipantDateQuestionTitle Googleフォームのイベント参加日時選択を求める質問文
+   * @param {String} participantDateQuestionTitle Googleフォームのイベント参加日時選択を求める質問文
    * @param {String} formId GoogleフォームのID
    * @param {String} choicesType 参加日時を求める質問の選択肢のタイプ checkbox or radio
    * @param {String} folderId QRコードを保存しておくGoogle Drive上のフォルダーID
@@ -32,7 +32,7 @@ class EventManagementApp_{
    * @param {String} bcc BCC
    * 
    */
-  acceptApplication(e, nameQuestionTitle, emailQuestionTitle, selectParticipantDateQuestionTitle, formId, choicesType, folderId, subject, body, fromAddress, fromName, cc, bcc){
+  acceptApplication(e, nameQuestionTitle, emailQuestionTitle, participantDateQuestionTitle, formId, choicesType, folderId, subject, body, fromAddress, fromName, cc, bcc){
 
     // イベントテーブルの上書きを防止するため、コンテナされているスプレッドシートをロック
     const lock = LockService.getDocumentLock();
@@ -44,7 +44,7 @@ class EventManagementApp_{
       // 申請者をインスタンス化
       const name = answer.getByQuestionTitle(nameQuestionTitle)[0];
       const email = answer.getByQuestionTitle(emailQuestionTitle)[0];
-      let participantDates = answer.getByQuestionTitle(selectParticipantDateQuestionTitle)[0].split(', ');
+      let participantDates = answer.getByQuestionTitle(participantDateQuestionTitle)[0].split(', ');
       participantDates = participantDates.map(participantDate => {
         return new ParticipantDate_(participantDate);
       });
@@ -64,7 +64,7 @@ class EventManagementApp_{
       eventRepository.saveAll(eventCollection);
 
       // 主催者がフォームの選択肢を更新
-      const participantQuestion = new SelectParticipantDateQuestion_(formId, selectParticipantDateQuestionTitle, choicesType);
+      const participantQuestion = new ParticipantDateQuestion_(formId, participantDateQuestionTitle, choicesType);
       organizer.refreshChoices(participantQuestion);
 
       // 主催者がQRコードを発行
@@ -107,11 +107,11 @@ class EventManagementApp_{
    * フォームの選択肢を初期化する
    * 
    * @param {String} formId GoogleフォームのID
-   * @param {String} selectParticipantDateQuestionTitle Googleフォームのイベント参加日時選択を求める質問文
+   * @param {String} participantDateQuestionTitle Googleフォームのイベント参加日時選択を求める質問文
    * @param {String} choicesType 参加日時を求める質問の選択肢のタイプ checkbox or radio
    * 
    */
-  initializeChoices(formId, selectParticipantDateQuestionTitle, choicesType){
+  initializeChoices(formId, participantDateQuestionTitle, choicesType){
     
     // 主催者をインスタンス化
     const eventRepository = new EventRepository_(this.ssId,this.eventSheetName);
@@ -120,7 +120,7 @@ class EventManagementApp_{
     const organizer = new Organizer_(eventCollection);
 
     // 主催者がフォームの参加日時選択肢を更新
-    const participantQuestion = new SelectParticipantDateQuestion_(formId, selectParticipantDateQuestionTitle, choicesType);
+    const participantQuestion = new ParticipantDateQuestion_(formId, participantDateQuestionTitle, choicesType);
     organizer.refreshChoices(participantQuestion);
 
   }
