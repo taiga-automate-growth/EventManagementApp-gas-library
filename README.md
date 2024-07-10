@@ -170,12 +170,106 @@ function managedAttendance(e){
 |attendanceSheetName|String|出席情報を記録するシートの名前|attendances|
 
 ## 依存関係
-本システムは13個のクラスで構築されています。
+本システムは11個のクラスで構成されています。
 
 それぞれのクラスの依存関係を示します。
 
 ```mermaid
 classDiagram
-Answer 
+Answer_ : Object values
+Answer_ : getByQuestionTitle(questionTitle)
+Answer_ : getAllQuestionWithAnswer()
+
+Applicant_ : String name
+Applicant_ : String email
+Applicant_ : Blob[] qrcodes
+Applicant_ : accepted(participantDate)
+Applicant_ : addQR(qrcode)
+Applicant_ : getRequestResult()
+Applicant_ : ParticipantDate_[] participantDate
+Applicant_ : getParticipantDatesAsArray()
+Applicant_ : accepted(participantDate)
+Applicant_ : getRequestResult()
+Applicant_ *-- ParticipantDate_
+
+SheetChangeEvent_ : Range activeCell
+SheetChangeEvent_ : String type
+SheetChangeEvent_ : isBelongToTargetSheet(targetSheetName)
+SheetChangeEvent_ : isValueExists()
+SheetChangeEvent_ : getScanData()
+
+Event_ : String eventDate 
+Event_ : String day
+Event_ : String startTime
+Event_ : String endTime
+Event_ : Number limit
+Event_ : Number filled
+Event_ : Number attendance
+Event_ : calculateRemained()
+Event_ : requested()
+Event_ : joined()
+Event_ : isOverLimit()
+Event_ : getAsArray()
+Event_ : equals(event)
+Event_ : getAsFormChoicesTitle()
+Event_ : getDateAndTime()
+
+EventRepository_ : String ssId
+EventRepository_ : String eventSheetName
+EventRepository_ : SpreadSheet ss
+EventRepository_ : Sheet sh
+EventRepository_ : selectAll()
+EventRepository_ : saveAll(events)
+EventRepository_ : findByDateAndTime(date)
+EventRepository_ : save()
+
+EventRepository_ --> Event_
+
+Mail_ : String recipient
+Mail_ : String subject
+Mail_ : String body
+Mail_ : Object options
+Mail_ : sent()
+Mail_ : replaceSubjectAndBody(answer)
+Mail_ : attachmentToZip(fileName)
+Mail_ : getAlias()
+
+Organizer_ : Event_[] events
+Organizer_ : receiveApplication(applicant)
+Organizer_ : refreshChoices(selectParticipantDateQuestion)
+Organizer_ : createQR(applicant, folderId)
+Organizer_ : reply(mail, answer)
+Organizer_ : receivedAttendance(event)
+Organizer_ : getEventAsArray()
+Organizer_ : canAccept(event)
+Organizer_ *-- Event_
+Organizer_ --> ParticipantDateQuestion_
+Organizer_ --> Applicant_ 
+Organizer_ --> Mail_
+
+Participant_ : String scanData
+Participant_ : getName()
+Participant_ : getDate()
+
+EventManagementApp_ *-- Participant_
+
+ParticipantDate_ : String title
+ParticipantDate_ : Boolean acceptFlag
+ParticipantDate_ : accepted()
+ParticipantDate_ : isAccept()
+ParticipantDate_ : getDateAndTime()
+ParticipantDate_ : getAsArray()
+ParticipantDate_ : equals(participantDate)
+
+ParticipantDateQuestion_ : String formId
+ParticipantDateQuestion_  : String title
+ParticipantDateQuestion_  : String type
+ParticipantDateQuestion_  : create()
+ParticipantDateQuestion_  : refreshedChoices(choiceTitles)
+
+EventManagementApp_ : String ssId
+EventManagementApp_ : String eventSheetName
+EventManagementApp_ *-- Answer_
+EventManagementApp_ *-- SheetChangeEvent_ 
 
 ```
